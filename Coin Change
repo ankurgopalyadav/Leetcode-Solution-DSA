@@ -1,0 +1,19 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[][] dp=new int[coins.length][amount+1];
+        for(int[] r:dp)Arrays.fill(r,-1);
+        int res=solve(coins.length-1,amount,coins,dp);
+        return res==(int)Math.pow(10,9)?-1:res;
+    }
+    int solve(int ind,int t,int[] c,int[][] dp){
+        if(ind==0){
+            if(t%c[ind]==0)return t/c[ind];
+            return 1000000000;
+        }
+        if(dp[ind][t]!=-1)return dp[ind][t];
+        int n=0+solve(ind-1,t,c,dp);
+        int q=Integer.MAX_VALUE;
+        if(c[ind]<=t)q=1+solve(ind,t-c[ind],c,dp);
+        return dp[ind][t]=Math.min(n,q);
+    }
+}
