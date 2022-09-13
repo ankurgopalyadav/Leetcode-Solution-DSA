@@ -1,0 +1,19 @@
+
+
+int reverse(int x){
+    int num;
+    int num1=0;
+     while(x!=0)
+     {
+        num=x%10;
+         x=x/10;
+          if((num1>INT_MAX/10) || (num1==INT_MAX/10  && num>INT_MAX%10))
+            return 0;           
+        
+        //the below if will take care of r going below MIN before it even goes below MIN
+        if((num1<INT_MIN/10) || (num1==INT_MIN/10  && num<INT_MIN%10)) 
+            return 0;
+        num1=num1*10+num;
+     }
+return num1;
+}
